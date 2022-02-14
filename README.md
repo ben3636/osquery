@@ -8,3 +8,7 @@ These queries use OSquery by Facebook so you'll need to install that to run thes
 Happy Hunting :)
 
 -Ben
+
+> NOTE: If MacOS reports the app version of this tool as damaged, you'll need to open Terminal and run the following command to bypass GateKeeper. The app is self-signed and contains a shell script so MacOS will (as it should) do all it can to prevent you from clicking on dumb shit :)
+
+> `xattr -cr ~/Downloads/MacOS\ Incident\ Response.app`
