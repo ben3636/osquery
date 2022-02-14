@@ -4,7 +4,7 @@ echo '                             LaunchAgents & LaunchDaemons + Signature     
 echo '------------------------------------------------------------------------------------------------' >> ir-results.txt
 
 
-echo 'select distinct l.name,l.path,l.program,s.signed,s.authority from launchd as l join signature as s on s.path=l.path where l.path not like "/System/Library/%";' | osqueryi --csv | column -t -s "|" >> ir-results.txt
+echo 'select distinct l.name,l.path,l.program,l.program_arguments,s.signed,s.authority from launchd as l join signature as s on s.path=l.path where l.path not like "/System/Library/%";' | osqueryi --csv | column -t -s "|" >> ir-results.txt
 
 echo >> ir-results.txt
 echo '------------------------------------------------------------------------------------------------' >> ir-results.txt
