@@ -25,7 +25,7 @@ dir='IR_Results/'
 
 # Print 1st Half of HTML
 echo '<html>' > RESULTS.html
-echo '<body style="background-color:#000000;color:white">' >> RESULTS.html
+echo '<body style="background-color:#000000;color:white;font-family: verdana">' >> RESULTS.html
 echo '<style>' >> RESULTS.html
 echo 'table {' >> RESULTS.html
 echo 'border-collapse: collapse;' >> RESULTS.html
@@ -33,6 +33,7 @@ echo '}' >> RESULTS.html
 echo 'th, td {' >> RESULTS.html
 echo 'border: 1px solid white;' >> RESULTS.html
 echo 'padding: 10px;' >> RESULTS.html
+echo 'font-size:10px;' >> RESULTS.html
 echo 'text-align: left;' >> RESULTS.html
 echo '}' >> RESULTS.html
 echo '</style>' >> RESULTS.html
