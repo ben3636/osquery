@@ -9,6 +9,13 @@ Happy Hunting :)
 
 -Ben
 
+## Cargo Manifest
+
+- ir.sh
+  - This is the raw script that runs the show, use this is you want to pull it apart and see what makes it tick
+- MacOS Incident Response.app.zip
+  - This is the app version of the tool, this is just a shiny wrapper for the bash script that will be more friendly for less tech-savvy users
+
 > NOTE: If MacOS reports the app version of this tool as damaged, you'll need to open Terminal and run the following command to bypass GateKeeper. The app is self-signed and contains a shell script so MacOS will (as it should) do all it can to prevent you from clicking on dumb shit :)
 
 > `xattr -cr ~/Downloads/MacOS\ Incident\ Response.app`
