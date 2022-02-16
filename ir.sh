@@ -25,16 +25,22 @@ dir='IR_Results/'
 
 # Print 1st Half of HTML
 echo '<html>' > RESULTS.html
+echo '<body style="background-color:#000000;color:white">' >> RESULTS.html
 echo '<style>' >> RESULTS.html
 echo 'table {' >> RESULTS.html
 echo 'border-collapse: collapse;' >> RESULTS.html
 echo '}' >> RESULTS.html
 echo 'th, td {' >> RESULTS.html
-echo 'border: 1px solid black;' >> RESULTS.html
+echo 'border: 1px solid white;' >> RESULTS.html
 echo 'padding: 10px;' >> RESULTS.html
 echo 'text-align: left;' >> RESULTS.html
 echo '}' >> RESULTS.html
 echo '</style>' >> RESULTS.html
+echo '</style>' >> RESULTS.html
+echo '<div style="text-align:center">' >> RESULTS.html
+echo '<h1><b>Incident Response Results</b></h1>' >> RESULTS.html
+echo '</div>' >> RESULTS.html
+echo '<hr />' >> RESULTS.html
 
 ls -1 IR_Results | grep -v items.tmp | while read file
 do
@@ -70,5 +76,6 @@ do
 		echo '</tr>'
 	done
 	echo '</table>'
+	echo '</body>'
 	echo '</html>'
 done | sed -e "s/\"\"//g" >> RESULTS.html
