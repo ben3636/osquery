@@ -3,10 +3,10 @@
 mkdir -p ./IR_Results
 
 echo 'LaunchAgents & LaunchDaemons + Signature' > IR_Results/launchd.txt
-echo 'select distinct l.name,l.path,l.program,l.program_arguments,s.signed,s.authority from launchd as l join signature as s on s.path=l.path where l.path not like "/System/Library/%";' | osqueryi --csv  >> IR_Results/launchd.txt
+echo 'select distinct l.name,l.path,l.program,l.program_arguments,s.signed,s.authority from launchd as l join signature as s on s.path=l.path where l.path not like "/System/Library/%" AND l.path not like "/Library/Apple/System/%";' | osqueryi --csv  >> IR_Results/launchd.txt
 
 echo 'Kernel Extensions + Signature' > IR_Results/kernext.txt
-echo 'select k.name,k.path,s.signed,s.authority from kernel_extensions AS k JOIN signature AS s on s.path=k.path WHERE k.path NOT LIKE "/System/%" UNION SELECT split(f.path,"/",2),f.path,x.signed,x.authority FROM file AS f JOIN signature AS x on x.path=f.path WHERE f.path LIKE "/Library/Extensions/%";' | osqueryi --csv  >> IR_Results/kernext.txt
+echo 'select k.name,k.path,s.signed,s.authority from kernel_extensions AS k JOIN signature AS s on s.path=k.path WHERE k.path NOT LIKE "/System/%" UNION SELECT split(f.path,"/",2),f.path,x.signed,x.authority FROM file AS f JOIN signature AS x on x.path=f.path WHERE f.path LIKE "/Library/Extensions/%" AND NOT (f.path="/Library/Extensions/HighPointIOP.kext/" OR f.path="/Library/Extensions/HighPointRR.kext/" OR f.path="/Library/Extensions/SoftRAID.kext/" OR f.path="/Library/Extensions/AppleMobileDevice.kext/");' | osqueryi --csv  >> IR_Results/kernext.txt
 
 echo 'System Extensions + Signature' > IR_Results/sysext.txt
 echo 'select DISTINCT e.path,e.state,e.identifier,e.category,e.version,e.team,s.signed,s.authority from system_extensions AS e join signature AS s on s.path=e.path;' | osqueryi --csv  >> IR_Results/sysext.txt
@@ -18,8 +18,13 @@ echo 'Package Receipts' > IR_Results/pkgrec.txt
 echo 'select package_id, location, installer_name, datetime(install_time, "unixepoch") AS install_time from package_receipts WHERE installer_name NOT LIKE "softwareupdated" ORDER by install_time desc;' | osqueryi --csv  >> IR_Results/pkgrec.txt
 
 echo 'Apps' > IR_Results/apps.txt
-echo 'select name,path from apps WHERE path not LIKE "/System/%";' | osqueryi --csv  >> IR_Results/apps.txt
+echo 'select distinct a.name,a.path,s.signed,s.authority from apps AS a  JOIN signature AS s on s.path=a.path WHERE a.path not LIKE "/System/%";' | osqueryi --csv  >> IR_Results/apps.txt
 
+echo "Chrome Extensions" > IR_Results/chromeext.txt
+echo 'SELECT uid, name, version FROM chrome_extensions WHERE chrome_extensions.uid IN (SELECT uid FROM users);' | osqueryi --csv  >> IR_Results/chromeext.txt
+
+echo "Crontab Entries" > IR_Results/cron.txt
+echo 'select * from crontab;' | osqueryi --csv  >> IR_Results/cron.txt
 
 dir='IR_Results/'
 
