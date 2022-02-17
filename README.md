@@ -9,6 +9,9 @@ Happy Hunting :)
 
 -Ben
 
+## Demo Install & Results
+[![MacOS IR Tool - Demo Installation and Results](https://img.youtube.com/vi/SCJtRZV3uUs/0.jpg)](https://youtu.be/SCJtRZV3uUs "MacOS IR Tool - Demo Installation and Results")
+
 ## Cargo Manifest
 
 - ir.sh
